@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+  - "node"
+script: npm run build
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  keep-history: true
+  repo: kopelli/bitburner-beta
+  target-branch: master
+  on:
+    branch: travis-ci

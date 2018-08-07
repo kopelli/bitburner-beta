@@ -1,0 +1,64 @@
+@import "mixins";
+@import "theme";
+
+/* interactivetutorial.css */
+#interactive-tutorial-wrapper {
+    position: relative;
+}
+
+#interactive-tutorial-container {
+    display: none;
+    position: absolute; /* Stay in place */
+    right: 0;
+    top: 0;
+    height: 400px; /* Full height */
+    padding: 10px;
+    border: 5px solid #fff;
+    width: 20%;
+    overflow: auto; /* Enable scroll if needed */
+    background-color: #444; /* Fallback color */
+    color: #fff;
+
+    > strong {
+        background-color: #444;
+    }
+}
+
+#interactive-tutorial-text {
+    padding: 4px;
+    margin: 4px;
+    color: #fff;
+    background-color: #444;
+}
+
+#interactive-tutorial-exit,
+#interactive-tutorial-next,
+#interactive-tutorial-back {
+    @include borderRadius(12px);
+    @include boxShadow(1px 1px 3px #000);
+
+    color: #aaa;
+    font-size: $defaultFontSize * 1.25;
+    font-weight: bold;
+    background-color: #000;
+
+    &:hover,
+    &:focus {
+        color: #fff;
+        text-decoration: none;
+        cursor: pointer;
+    }
+}
+
+#interactive-tutorial-exit {
+    float: left;
+}
+
+#interactive-tutorial-back {
+    margin-right: 20%;
+    float: right;
+}
+
+#interactive-tutorial-next {
+    float: right;
+}

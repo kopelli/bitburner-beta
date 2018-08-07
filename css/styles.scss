@@ -1,0 +1,560 @@
+@import "mixins";
+@import "theme";
+
+@import "reset";
+
+:root{
+    --my-font-color: #6f3;
+    --my-background-color: #000;
+    --my-highlight-color: #fff;
+}
+
+body {
+    background-color: var(--my-background-color);
+}
+
+p,
+pre,
+h2,
+.text {
+    color: var(--my-font-color);
+}
+
+h1 {
+    font-size: $defaultFontSize * 1.375;
+    color: var(--my-font-color);
+}
+
+ul {
+    padding: 2px;
+    list-style-type: none;
+}
+
+li {
+    list-style-type: none;
+}
+
+span {
+    margin: 4px;
+    padding: 4px;
+}
+
+button[type="button"] {
+    @include transform(translateX(-50%));
+
+    padding: 0.5rem 1rem;
+    position: absolute;
+    z-index: 1;
+    bottom: 10px;
+    left: 50%;
+}
+
+#entire-game-container {
+    background-color: transparent;
+}
+
+/* Disable border highlight on elements */
+input:focus,
+textarea:focus,
+button:focus,
+td:focus,
+tr:focus {
+    outline: none;
+}
+
+/* Main navigation menu */
+.mainmenu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 10%;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+
+    border: 0;
+    border-bottom: 1px solid #000;
+    border-radius: 0;
+    background-color: #333;
+}
+
+/* Default buttons */
+.mainmenu > li a {
+    display: block;
+    color: #e6e6e6;
+    background-color: #555;
+    padding: 16px;
+    text-decoration: none;
+}
+
+/* Hovering makes them lighter */
+.mainmenu > li a:hover,
+.mainmenu > li a:hover:not(.active),
+.mainmenu > li a:focus {
+    background-color: #777;
+    color: #fff;
+}
+
+/* Panel headers can become active, and they are "lighter" than the rest */
+.mainmenu > li a.active {
+    background-color: #777;
+    color: #fff;
+}
+
+.mainmenu > li a.active:hover {
+    background-color: #aaa;
+}
+
+/* Plus and minus signs */
+.mainmenu-accordion-header:after {
+    content: '\02795';
+    font-size: $defaultFontSize * 0.8125;
+    color: #fff;
+    float: right;
+    margin-left: 5px;
+}
+
+.mainmenu-accordion-header.opened:after {
+    content: "\2796";
+}
+
+.mainmenu-accordion-header.opened {
+    background-color: #222;
+}
+
+/* Slide down transition */
+.mainmenu-accordion-panel {
+    max-height: 0;
+    opacity: 1;
+    transition: max-height 0.2s ease-out;
+}
+
+/* Borders */
+.mainmenu-accordion-header {
+    border: 2px solid #fff;
+}
+
+/* Make html links ("a" elements) nice looking buttons with this class */
+a:link,
+a:visited {
+    color: #fff;
+}
+
+.a-link-button {
+    text-decoration: none;
+    background-color: #555;
+    color: #fff;
+    padding: 5px;
+    margin: 5px;
+    border: 1px solid #333;
+
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+}
+
+.a-link-button:hover {
+    background-color: #666;
+}
+
+.a-link-button:active {
+    @include boxShadow(inset 0 1px 4px rgba(0, 0, 0, 0.6));
+}
+
+/* Make anchor tags ("a" elements) inactive (not clickable) */
+.a-link-button-inactive {
+    text-decoration: none;
+    background-color: #333;
+    color: #fff;
+    padding: 5px;
+    margin: 5px;
+    border: 1px solid #333;
+    cursor: default;
+}
+
+.a-link-button-inactive:hover .tooltiptext,
+.a-link-button-inactive:hover .tooltiptexthigh,
+.a-link-button-inactive:hover .tooltiptextleft {
+    visibility: visible;
+}
+
+.a-link-button-inactive:active {
+    pointer-events: none;
+}
+
+/* Make anchor tags ("a" elements) for activated actions */
+.a-link-button-bought {
+    text-decoration: none;
+    background-color: #0a0;
+    color: #fff;
+    padding: 5px;
+    margin: 5px;
+    border: 1px solid #0a0;
+    cursor: default;
+}
+
+.a-link-button-bought:hover .tooltiptext,
+.a-link-button-bought:hover .tooltiptexthigh,
+.a-link-button-bought:hover .tooltiptextleft {
+    visibility: visible;
+}
+
+.a-link-button-bought:active {
+    pointer-events: none;
+}
+
+.dropdown {
+    color: #fff;
+    background-color: #000;
+}
+
+.text-input {
+    color: #fff;
+    background-color: #000;
+}
+
+/* Notification icon (for create program right now only) */
+#create-program-tab {
+    position: relative;
+}
+#create-program-notification {
+    font-size: $defaultFontSize * 0.625;
+
+    position: absolute; /* Position the badge within the relatively positioned button */
+    top: 0;
+    right: 0;
+}
+
+.notification-on {
+    background-color: #fa3e3e;
+    color: #fff;
+    border-radius: 2px;
+    padding: 1px 3px;
+}
+
+.notification-off {
+    background-color: #333;
+    color: #333;
+    border-radius: 0;
+    padding: 0;
+}
+
+/* Tool tips (when hovering over an element */
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 300px;
+    background-color: var(--my-background-color);
+    border: 2px solid var(--my-highlight-color);
+    color: #fff;
+    text-align: center;
+    padding: 4px;
+    left: 101%;
+
+    position: absolute;
+    z-index: 99;
+}
+
+/* Same thing as a normal tooltip except its a bit higher */
+.tooltip .tooltiptexthigh {
+    visibility: hidden;
+    width: 300px;
+    background-color: var(--my-background-color);
+    border: 2px solid var(--my-highlight-color);
+    color: #fff;
+    text-align: center;
+    padding: 4px;
+    left: 101%;
+    bottom: -25%;
+
+    position: absolute;
+    z-index: 99;
+}
+
+/* Similar to a normal tooltip except its positioned on the left of the elemnt
+   rather than the right to avoid exceeding the elements normal width */
+.tooltip .tooltiptextleft {
+    visibility: hidden;
+    width: 300px;
+    background-color: var(--my-background-color);
+    border: 2px solid var(--my-highlight-color);
+    color: #fff;
+    text-align: center;
+    padding: 4px;
+    left: 40%;
+    bottom: -10%;
+
+    position: absolute;
+    z-index: 99;
+}
+
+.tooltip:hover .tooltiptext,
+.tooltip:hover .tooltiptexthigh,
+.tooltip:hover .tooltiptextleft {
+    visibility: visible;
+}
+
+/* help tip. Question mark that opens popup with info/details */
+.help-tip {
+    content: '?';
+    padding: 1px;
+    margin-left: 3px;
+    color: #fff;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.help-tip:hover {
+    background-color: #888;
+}
+
+.help-tip:active {
+    @include boxShadow(inset 0 1px 4px rgba(0, 0, 0, 0.6));
+}
+
+/* Flashing button (Red) */
+@-webkit-keyframes glowing {
+    0% { background-color: #b20000; -webkit-box-shadow: 0 0 3px #b20000; }
+    50% { background-color: #f00; -webkit-box-shadow: 0 0 40px #f00; }
+    100% { background-color: #b20000; -webkit-box-shadow: 0 0 3px #b20000; }
+}
+
+@-moz-keyframes glowing {
+    0% { background-color: #b20000; -moz-box-shadow: 0 0 3px #b20000; }
+    50% { background-color: #f00; -moz-box-shadow: 0 0 40px #f00; }
+    100% { background-color: #b20000; -moz-box-shadow: 0 0 3px #b20000; }
+}
+
+@-o-keyframes glowing {
+    0% { background-color: #b20000; box-shadow: 0 0 3px #b20000; }
+    50% { background-color: #f00; box-shadow: 0 0 40px #f00; }
+    100% { background-color: #b20000; box-shadow: 0 0 3px #b20000; }
+}
+
+@keyframes glowing {
+    0% { background-color: #b20000; box-shadow: 0 0 3px #b20000; }
+    50% { background-color: #f00; box-shadow: 0 0 40px #f00; }
+    100% { background-color: #b20000; box-shadow: 0 0 3px #b20000; }
+}
+
+.flashing-button {
+    -webkit-animation: glowing 1500ms infinite;
+    -moz-animation: glowing 1500ms infinite;
+    -o-animation: glowing 1500ms infinite;
+    animation: glowing 1500ms infinite;
+}
+
+/* Blinking Cursor */
+/* ----- blinking cursor animation ----- */
+.typed-cursor{
+    opacity: 1;
+    -webkit-animation: blink 0.95s infinite;
+    -moz-animation: blink 0.95s infinite;
+    -ms-animation: blink 0.95s infinite;
+    -o-animation: blink 0.95s infinite;
+    animation: blink 0.95s infinite;
+}
+
+@-keyframes blink{
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+@-webkit-keyframes blink{
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+@-moz-keyframes blink{
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+@-ms-keyframes blink{
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+@-o-keyframes blink{
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+/* Status text */
+@-webkit-keyframes status-text{
+    from{
+        opacity: 1;
+        top: 0;
+    }
+    to{
+        opacity: 0;
+        top: 0;
+    }
+}
+
+.status-text{
+    display: inline;
+    position: fixed;
+    top: 0;
+    -webkit-animation: status-text 3s 1;
+    background-color: transparent;
+    height: 15%;
+}
+
+#status-text-container {
+    background-color: transparent;
+}
+
+#status-text {
+    font-size: $defaultFontSize * 1.25;
+    color: #fff;
+    right: 0;
+    bottom: 0;
+    padding: 4px;
+    margin-right: 14px;
+    background-color: transparent;
+    z-index: 2;
+    width: auto;
+}
+
+/* Character Overview */
+#character-overview-wrapper {
+    position: relative;
+}
+#character-overview-container {
+    display: none;
+    position: absolute; /* Stay in place */
+    right: 0;
+    top: 0;
+    height: auto; /* Full height */
+    padding: 8px;
+    border: 2px solid var(--my-highlight-color);
+    width: 19%;
+    overflow: auto; /* Enable scroll if needed */
+    background-color: #444; /* Fallback color */
+    z-index: 1;
+}
+
+#character-overview-text {
+    color: #fff;
+    background-color: #444;
+}
+
+.character-stat-text {
+    color: #fff;
+    background-color: #444;
+}
+ .character-stat-cell {
+    text-align: right;
+}
+
+#character-overview-save-button,
+#character-overview-options-button {
+    @include borderRadius(12px);
+    @include boxShadow(1px 1px 3px #000);
+
+    color: #aaa;
+    font-size: $defaultFontSize * 0.875;
+    font-weight: bold;
+    height: 22px;
+    background-color: #000;
+}
+
+.character-quick-options {
+    padding-top: 5px;
+}
+
+#character-overview-save-button:hover,
+#character-overview-save-button:focus,
+#character-overview-options-button:hover,
+#character-overview-options-button:focus {
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#character-overview-options-button {
+    display: inline;
+}
+
+/* Scan analyze links from AutoLink */
+.scan-analyze-link {
+    cursor: pointer;
+    color: #fff;
+    text-decoration: underline;
+}
+.scan-analyze-link:hover {
+    text-decoration: none;
+}
+
+/* Accordion menus (Header with collapsible panel) */
+.accordion-header {
+    background-color: #444;
+    font-size: $defaultFontSize * 1.25;
+    color: #fff;
+    margin: 6px 6px 0 6px;
+    padding: 6px;
+    cursor: pointer;
+    width: 80%;
+    text-align: left;
+    border: none;
+    outline: none;
+}
+
+.accordion-header.active,
+.accordion-header:hover {
+    background-color: #555;
+}
+
+.accordion-header.active:hover {
+    background-color: #666;
+}
+
+.accordion-header:after {
+    content: '\02795'; /* "plus" sign (+) */
+    font-size: $defaultFontSize * 0.8125;
+    color: #fff;
+    float: right;
+    margin-left: 5px;
+}
+
+.accordion-header.active:after {
+    content: "\2796"; /* "minus" sign (-) */
+    font-size: $defaultFontSize * 0.8125;
+    color: #fff;
+    float: right;
+    margin-left: 5px;
+}
+
+.accordion-panel {
+    margin: 0 6px 6px 6px;
+    padding: 0 6px 6px 6px;
+    width: 75%;
+    margin-left: 5%;
+    display: none;
+    background-color: #555;
+    overflow-y: auto;
+    overflow-x: none;
+}
+
+.accordion-panel div,
+.accordion-panel ul,
+.accordion-panel p,
+.accordion-panel ul > li {
+    background-color: #555;
+}
+
+/* override the global <span> styling */
+#active-scripts-total-production-active,
+#active-scripts-total-prod-aug-total,
+#active-scripts-total-prod-aug-avg {
+    margin: 0;
+    padding: 0;
+}

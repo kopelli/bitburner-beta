@@ -1,0 +1,8 @@
+Changelog.txt
+Netburner.txt
+/doc/build
+/node_modules
+/dist/*.map
+/tests/*.map
+/tests/*.bundle.*
+/tests/*.css
