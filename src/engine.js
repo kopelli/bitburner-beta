@@ -938,6 +938,7 @@ let Engine = {
     },
 
     updateGame: function(numCycles = 1) {
+        console.debug(`updateGame(${numCycles})`);
         //Update total playtime
         var time = numCycles * Engine._idleSpeed;
         if (Player.totalPlaytime == null) {Player.totalPlaytime = 0;}
